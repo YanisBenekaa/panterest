@@ -7,33 +7,16 @@
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
         {% endblock %}
-        <style>
-            .alert {
-                padding: 10px;
-                color: white;
-                text-align: center;
-            }
 
-            .alert-success {
-                background-color: green;
-            }
-
-            .alert-error {
-                background-color: red;
-            }
-
-            .alert-info {
-                background-color: blue;
-            }
-        </style>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            <script src="//code.jquery.com/jquery.js"></script>
+            <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
         {% endblock %}
     </head>
     <body>
-        {{ include('layouts/partials/_flash_messages.html.twig') }}
-
         <nav>
             <ul>
                 <li><a href="{{ path('app_home') }}">Home</a></li>
@@ -41,5 +24,6 @@
             </ul>
         </nav>
         {% block body %}{% endblock %}
+        {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
     </body>
 </html>

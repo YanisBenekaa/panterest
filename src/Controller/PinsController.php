@@ -6,6 +6,7 @@ use App\Entity\Pin;
 use App\Form\PinType;
 use App\Repository\PinRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,7 @@ class PinsController extends AbstractController
     /**
      * @Route("/pins/create", name="app_pins_create", methods={"GET", "POST"})
      */
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, EntityManagerInterface $em, FlashyNotifier $flashy): Response
     {
         $pin = new Pin;
 
@@ -38,7 +39,7 @@ class PinsController extends AbstractController
             $em->persist($pin);
             $em->flush();
 
-            $this->addFlash('success', 'Pin successfully created !');
+            $flashy->success('Pin successfully created !');
 
             return $this->redirectToRoute('app_home');
         }
@@ -59,7 +60,7 @@ class PinsController extends AbstractController
     /**
      * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit", methods={"GET", "POST", "PUT"})
      */
-    public function edit(Request $request, EntityManagerInterface $em, Pin $pin): Response
+    public function edit(Request $request, EntityManagerInterface $em, Pin $pin, FlashyNotifier $flashy): Response
     {
         $form = $this->createForm(PinType::class, $pin);
 
@@ -68,7 +69,7 @@ class PinsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
-            $this->addFlash('success', 'Pin successfully updated !');
+            $flashy->success('Pin successfully updated !');
 
             return $this->redirectToRoute('app_home');
         }
@@ -82,13 +83,13 @@ class PinsController extends AbstractController
     /**
      * @Route("/pins/{id<[0-9]+>}", name="app_pins_delete", methods={"POST", "DELETE"})
      */
-    public function delete(Request $request, EntityManagerInterface $em, Pin $pin): Response
+    public function delete(Request $request, EntityManagerInterface $em, Pin $pin, FlashyNotifier $flashy): Response
     {
         if ($this->isCsrfTokenValid('pin_deletion_' . $pin->getId(), $request->request->get('csrf_token'))) {
             $em->remove($pin);
             $em->flush();
 
-            $this->addFlash('info', 'Pin successfully deleted !');
+            $flashy->info('Pin successfully deleted !');
         }
 
         return $this->redirectToRoute('app_home');

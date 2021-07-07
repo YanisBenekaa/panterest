@@ -94,6 +94,9 @@
     "laminas/laminas-code": {
         "version": "4.4.0"
     },
+    "mercuryseries/flashy-bundle": {
+        "version": "v4.0.0"
+    },
     "monolog/monolog": {
         "version": "2.3.0"
     },
@@ -167,9 +170,6 @@
     },
     "psr/log": {
         "version": "1.1.4"
-    },
-    "psy/psysh": {
-        "version": "v0.10.8"
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"
@@ -628,9 +628,6 @@
     },
     "symfony/yaml": {
         "version": "v5.3.3"
-    },
-    "theofidry/psysh-bundle": {
-        "version": "4.4.0"
     },
     "theseer/tokenizer": {
         "version": "1.2.0"
