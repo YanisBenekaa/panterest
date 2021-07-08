@@ -88,6 +88,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "imagine/imagine": {
+        "version": "1.2.4"
+    },
     "jms/metadata": {
         "version": "2.5.0"
     },
@@ -96,6 +99,19 @@
     },
     "laminas/laminas-code": {
         "version": "4.4.0"
+    },
+    "liip/imagine-bundle": {
+        "version": "1.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.8",
+            "ref": "5a5bdc2d0e2533ed6935d5ae562f2b318a8fc1ee"
+        },
+        "files": [
+            "config/packages/liip_imagine.yaml",
+            "config/routes/liip_imagine.yaml"
+        ]
     },
     "mercuryseries/flashy-bundle": {
         "version": "v4.0.0"
