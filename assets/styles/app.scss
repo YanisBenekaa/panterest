@@ -17,3 +17,11 @@ body {
   @extend .shadow;
   @extend .img-thumbnail;
 }
+
+.pin img{
+  transition: transform 0.3s ease-out;
+
+  &:hover {
+    transform: scale(1.075);
+  }
+}
