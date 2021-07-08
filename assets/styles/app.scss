@@ -1,3 +1,8 @@
-@import "custom";
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
+$primary-font: 'Montserrat';
+
+body {
+  font-family: $primary-font, sans-serif;
+}
