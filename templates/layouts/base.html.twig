@@ -17,13 +17,13 @@
         {% endblock %}
     </head>
     <body>
-        {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
-
         {{ include('layouts/partials/_nav.html.twig') }}
 
         <main role="main" class="container">
             {% block body %}{% endblock %}
         </main>
+
+        {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 
         {{ include('layouts/partials/_footer.html.twig') }}
     </body>
