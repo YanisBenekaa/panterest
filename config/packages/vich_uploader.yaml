@@ -4,5 +4,5 @@ vich_uploader:
     mappings:
         pin_image:
             uri_prefix: /uploads/pins
-            upload_destination: '%kernel.project_dir%/public/uploads/pis'
+            upload_destination: '%kernel.project_dir%/public/uploads/pins'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
