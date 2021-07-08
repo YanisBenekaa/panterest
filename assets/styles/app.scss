@@ -6,3 +6,14 @@ $primary-font: 'Montserrat';
 body {
   font-family: $primary-font, sans-serif;
 }
+
+.mb-3 {
+  @extend .mt-3;
+}
+
+.vich-image img {
+  @extend .mb-2;
+  @extend .rounded;
+  @extend .shadow;
+  @extend .img-thumbnail;
+}
