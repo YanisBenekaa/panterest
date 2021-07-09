@@ -20,7 +20,13 @@
                         <h2 class="h5 text-center"><a href="{{ path('app_pins_show', {id: pin.id}) }}" class="text-secondary text-decoration-none">
                         {{ pin.title }}</a></h2>
                         <p class="text-center">{{ pin.description|u.truncate(10, '...', false) }}</p>
-                        <p class="text-muted text-center pb-3"><small>Submitted {{ pin.createdAt|ago }} by [OWNER FULL NAME]</small></p>
+                        <p class="text-muted text-center pb-3">
+                            <small>
+                                Submitted
+                                <time datetime="{{ pin.createdAt|date('Y-m-d H:i:s') }}"></time>{{ pin.createdAt|ago }}
+                                by [OWNER FULL NAME]
+                            </small>
+                        </p>
                     </article>
                 </div>
             {% endfor %}
