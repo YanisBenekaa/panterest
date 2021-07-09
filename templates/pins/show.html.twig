@@ -7,14 +7,11 @@
         <div class="col-md-6 mx-auto">
             <article class="pin bg-white rounded shadow">
                 <div class="mw-100 rounded-top overflow-hidden">
-                    <a href="{{ path('app_pins_show', {id: pin.id}) }}">
-                        <img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeholder.jpg')) | imagine_filter('squared_thumbnail_medium') }}"
-                             alt="{{ pin.title }}" class="w-100" />
-                    </a>
+                    <img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeholder.jpg')) | imagine_filter('squared_thumbnail_medium') }}"
+                         alt="{{ pin.title }}" class="w-100" />
                 </div>
-                <h2 class="h5 text-center"><a href="{{ path('app_pins_show', {id: pin.id}) }}" class="text-secondary text-decoration-none">
-                        {{ pin.title }}</a></h2>
-                <p class="text-center">{{ pin.description|u.truncate(10, '...', false) }}</p>
+                <h1 class="h5 text-center text-secondary text-decoration-none">{{ pin.title }}</h1>
+                <p class="text-center text-break">{{ pin.description }}</p>
                 <p class="text-muted text-center pb-3">
                     <small>
                         Submitted
