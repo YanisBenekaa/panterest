@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,9 +47,14 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        $request->getSession()->getFlashBag()->add('success', 'Welcome ' . $token->getUser()->getFullName() . '!');
+//        $request->getSession()->getFlashBag()->$flashy->success('Logged in succesfully !');
+
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
+
+        return new RedirectResponse($this->urlGenerator->generate('app_home'));
 
         // For example:
         //return new RedirectResponse($this->urlGenerator->generate('some_route'));
