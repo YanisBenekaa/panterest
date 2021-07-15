@@ -29,6 +29,8 @@ class PinsController extends AbstractController
      */
     public function create(Request $request, EntityManagerInterface $em, FlashyNotifier $flashy): Response
     {
+        $url = $_SERVER['REQUEST_URI'];
+
         $pin = new Pin;
 
         $form = $this->createForm(PinType::class, $pin);
@@ -46,6 +48,7 @@ class PinsController extends AbstractController
         }
 
         return $this->render('pins/create.html.twig', [
+            'url' => $url,
             'form' => $form->createView()
         ]);
     }
@@ -63,6 +66,8 @@ class PinsController extends AbstractController
      */
     public function edit(Request $request, EntityManagerInterface $em, Pin $pin, FlashyNotifier $flashy): Response
     {
+        $url = $_SERVER['REQUEST_URI'];
+
         $form = $this->createForm(PinType::class, $pin);
 
         $form->handleRequest($request);
@@ -77,6 +82,7 @@ class PinsController extends AbstractController
 
         return $this->render('pins/edit.html.twig', [
             'pin' => $pin,
+            'url' => $url,
             'form' => $form->createView()
         ]);
     }

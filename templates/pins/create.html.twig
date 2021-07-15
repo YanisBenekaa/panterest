@@ -8,7 +8,7 @@
 
             <h1>Create Pin</h1>
 
-            {{ include('pins/_form.html.twig', {submitButtonText: 'Create Pin'}) }}
+            {{ include('pins/_form.html.twig', {submitButtonText: 'Create Pin'}, {'url': url}) }}
         </div>
     </div>
 {% endblock %}
