@@ -20,13 +20,20 @@
                         <h2 class="h5 text-center"><a href="{{ path('app_pins_show', {id: pin.id}) }}" class="text-secondary text-decoration-none">
                         {{ pin.title }}</a></h2>
                         <p class="text-center">{{ pin.description|u.truncate(10, '...', false) }}</p>
-                        <p class="text-muted text-center pb-3">
+                        <p class="text-muted text-center">
                             <small>
                                 Submitted
                                 <time datetime="{{ pin.createdAt|date('Y-m-d H:i:s') }}"></time>{{ pin.createdAt|ago }}
                                 by {{ pin.user.fullName }}
                             </small>
                         </p>
+                        <a href="#" onclick="event.preventDefault(); confirm('Are you sure ?') &&
+    document.querySelector('#js-pin-delete-form-{{ pin.id }}').submit();" class="btn btn-warning m-3">&times;Delete</a>
+
+                        <form id="js-pin-delete-form-{{ pin.id }}" action="{{ path('app_pins_delete', {id: pin.id}) }}" method="post" style="display:none;">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token('pin_deletion_' ~ pin.id) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                        </form>
                     </article>
                 </div>
             {% endfor %}
