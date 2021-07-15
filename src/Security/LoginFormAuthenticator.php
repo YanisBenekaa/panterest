@@ -24,10 +24,12 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     public const LOGIN_ROUTE = 'app_login';
 
     private UrlGeneratorInterface $urlGenerator;
+    private FlashyNotifier $flashy;
 
-    public function __construct(UrlGeneratorInterface $urlGenerator)
+    public function __construct(UrlGeneratorInterface $urlGenerator, FlashyNotifier $flashy)
     {
         $this->urlGenerator = $urlGenerator;
+        $this->flashy = $flashy;
     }
 
     public function authenticate(Request $request): PassportInterface
@@ -47,8 +49,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        $request->getSession()->getFlashBag()->add('success', 'Welcome ' . $token->getUser()->getFullName() . '!');
-//        $request->getSession()->getFlashBag()->$flashy->success('Logged in succesfully !');
+        $this->flashy->success('Welcome ' . $token->getUser()->getFullName() . '!');
 
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
