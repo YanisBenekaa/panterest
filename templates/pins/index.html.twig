@@ -27,6 +27,8 @@
                                 by {{ pin.user.fullName }}
                             </small>
                         </p>
+
+                        {% if app.user == pin.user %}
                         <a href="#" onclick="event.preventDefault(); confirm('Are you sure ?') &&
     document.querySelector('#js-pin-delete-form-{{ pin.id }}').submit();" class="btn btn-warning m-3">&times;Delete</a>
 
@@ -34,6 +36,7 @@
                             <input type="hidden" name="csrf_token" value="{{ csrf_token('pin_deletion_' ~ pin.id) }}">
                             <input type="hidden" name="_method" value="DELETE">
                         </form>
+                        {% endif %}
                     </article>
                 </div>
             {% endfor %}

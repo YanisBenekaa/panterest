@@ -19,16 +19,19 @@
                         by {{ pin.user.fullName }}
                     </small>
                 </p>
-                <div class="text-center">
-                    <a href="{{ path('app_pins_edit', {id: pin.id}) }}" class="btn btn-light">Edit</a>
-                    <a href="#" onclick="event.preventDefault(); confirm('Are you sure ?') &&
+
+                {% if app.user == pin.user %}
+                    <div class="text-center">
+                        <a href="{{ path('app_pins_edit', {id: pin.id}) }}" class="btn btn-light">Edit</a>
+                        <a href="#" onclick="event.preventDefault(); confirm('Are you sure ?') &&
     document.querySelector('#js-pin-delete-form').submit();" class="btn btn-warning">Delete</a>
 
-                    <form id="js-pin-delete-form" action="{{ path('app_pins_delete', {id: pin.id}) }}" method="post" style="display:none;">
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token('pin_deletion_' ~ pin.id) }}">
-                        <input type="hidden" name="_method" value="DELETE">
-                    </form>
-                </div>
+                        <form id="js-pin-delete-form" action="{{ path('app_pins_delete', {id: pin.id}) }}" method="post" style="display:none;">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token('pin_deletion_' ~ pin.id) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                        </form>
+                    </div>
+                {% endif %}
             </article>
         </div>
     </div>
