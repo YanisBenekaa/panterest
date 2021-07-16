@@ -85,7 +85,7 @@ class ResetPasswordController extends AbstractController
      *
      * @Route("/reset/{token}", name="app_reset_password")
      */
-    public function reset(Request $request, UserPasswordHasherInterface $passwordHashed, string $token = null): Response
+    public function reset(Request $request, UserPasswordHasherInterface $passwordHashed, FlashyNotifier $flashy, string $token = null): Response
     {
         if ($token) {
             // We store the token in session and remove it from the URL, to avoid the URL being
@@ -130,6 +130,8 @@ class ResetPasswordController extends AbstractController
 
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
+
+            $flashy->success('Your password has been successfully reset !');
 
             return $this->redirectToRoute('app_home');
         }
