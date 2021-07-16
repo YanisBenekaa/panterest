@@ -53,7 +53,9 @@ class AccountController extends AbstractController
     {
         $user = $this->getUser();
 
-        $form = $this->createForm(ChangePasswordFormType::class);
+        $form = $this->createForm(ChangePasswordFormType::class, null, [
+            'current_password_is_required' => true
+        ]);
 
         $form->handleRequest($request);
 
