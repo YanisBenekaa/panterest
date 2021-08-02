@@ -20,7 +20,7 @@
                     </small>
                 </p>
 
-                {% if app.user == pin.user %}
+                {% if is_granted('PIN_MANAGE', pin) %}
                     <div class="text-center">
                         <a href="{{ path('app_pins_edit', {id: pin.id}) }}" class="btn btn-light">Edit</a>
                         <a href="#" onclick="event.preventDefault(); confirm('Are you sure ?') &&

@@ -7,6 +7,7 @@ use App\Form\PinType;
 use App\Repository\PinRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +27,7 @@ class PinsController extends AbstractController
 
     /**
      * @Route("/pins/create", name="app_pins_create", methods={"GET", "POST"})
+     * @IsGranted("PIN_CREATE")
      */
     public function create(Request $request, EntityManagerInterface $em, FlashyNotifier $flashy): Response
     {
@@ -63,9 +65,17 @@ class PinsController extends AbstractController
 
     /**
      * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit", methods={"GET", "POST", "PUT"})
+     * @IsGranted("PIN_MANAGE", subject="pin")
      */
     public function edit(Request $request, EntityManagerInterface $em, Pin $pin, FlashyNotifier $flashy): Response
     {
+
+        if ($pin->getUser() != $this->getUser()) {
+            $flashy->error('Access Forbidden !');
+
+            return  $this->redirectToRoute('app_home');
+        }
+
         $url = $_SERVER['REQUEST_URI'];
 
         $form = $this->createForm(PinType::class, $pin);
@@ -89,9 +99,17 @@ class PinsController extends AbstractController
 
     /**
      * @Route("/pins/{id<[0-9]+>}", name="app_pins_delete", methods={"POST", "DELETE"})
+     * @IsGranted("PIN_MANAGE", subject="pin")
      */
     public function delete(Request $request, EntityManagerInterface $em, Pin $pin, FlashyNotifier $flashy): Response
     {
+
+        if ($pin->getUser() != $this->getUser()) {
+            $flashy->error('Access Forbidden !');
+
+            return  $this->redirectToRoute('app_home');
+        }
+
         if ($this->isCsrfTokenValid('pin_deletion_' . $pin->getId(), $request->request->get('csrf_token'))) {
             $em->remove($pin);
             $em->flush();
