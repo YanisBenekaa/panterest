@@ -6,6 +6,7 @@ use App\Form\ChangePasswordFormType;
 use App\Form\UserFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,7 @@ class AccountController extends AbstractController
 {
     /**
      * @Route("/account", name="app_account", methods={"GET"})
+     * @IsGranted("ROLE_USER")
      */
     public function show(): Response
     {
@@ -24,6 +26,7 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/account/edit", name="app_account_edit", methods={"GET", "POST", "PUT"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function edit(Request $request, EntityManagerInterface $em, FlashyNotifier $flashy): Response
     {
@@ -47,7 +50,8 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/account/change-password", name="app_account_change_password", methods={"GET", "POST"})
+     * @Route("/account/change-password", name="app_account_change_password", methods={"GET", "POST", "PUT"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHashed, FlashyNotifier $flashy): Response
     {
