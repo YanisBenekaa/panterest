@@ -1,0 +1,62 @@
+version: '3.7'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: panterest_db
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    ports:
+      - "3307:3306"
+    networks:
+      - symfony
+
+  web:
+    build:
+      context: .
+      dockerfile: ./php/Dockerfile
+    container_name: panterest_web
+    volumes:
+      - ./php/vhosts:/etc/apache2/sites-enabled
+      - .:/var/www/html/panterest/
+    ports:
+      - "8741:80"
+    restart: always
+    networks:
+      - symfony
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: panterest_phpmyadmin
+    links:
+      - db
+    restart: always
+    ports:
+      - "8089:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+    networks:
+      - symfony
+
+  maildev:
+    image: maildev/maildev
+    container_name: panterest_maildev
+    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
+    restart: always
+    ports:
+      - "8081:80"
+    networks:
+      - symfony
+
+networks:
+  symfony:
+
+volumes:
+  db_data:

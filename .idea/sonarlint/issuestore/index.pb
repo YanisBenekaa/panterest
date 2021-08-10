@@ -5,8 +5,6 @@ N
 src/Security/EmailVerifier.php,2/5/25e59371ba89f9e954d6b099fbe6b12c60340c70
 9
 	.env.test,c/5/c589161bbc055e8f5fc7ed13aae8551821ece4b6
-4
-.env,3/c/3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
 T
 $migrations/Version20210713123338.php,4/2/421a79f021eb9160b5c862220a1676009296235c
 I
@@ -31,14 +29,6 @@ Q
 !src/Form/RegistrationFormType.php,9/5/95d4b58438357928efb9c5a862a6d289d874e878
 Z
 *src/Controller/ResetPasswordController.php,1/c/1c5bac33bbb9775157369c30286644ea6d25c0a2
-9
-	readme.md,2/7/275d783e298228506068436512433d343feb52aa
-:
-
-.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-:
-
-.env.local,1/f/1fa30fea3e9ae270a3c38a6113a3689d8987d108
 ]
 -src/EventSubscriber/LogoutEventSubscriber.php,0/0/000ee2e6777d6bfe82c84a6a8af01f8cfc580338
 N
@@ -59,5 +49,3 @@ U
 %src/Controller/SecurityController.php,7/c/7cc876ecdb4df676c79a6188e9f3ac45e5079434
 Q
 !src/Repository/UserRepository.php,9/4/943a623b5e2fd95ea78f6287fc600a6f8e0a5235
-?
-var/log/dev.log,c/2/c282d9c62a18e281a696156cd46dd60981cc21bb
