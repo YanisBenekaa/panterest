@@ -65,8 +65,8 @@ with the appropriate command (it depends on your system) like :
 chown -R $USER ./
 ```
 
-To migrate database, you need to enter inside the container that build the PHP image 
-(it's panterest_web in this case) from another terminal: 
+To launch the migrations, you need to enter inside the container that build the PHP image 
+(it's panterest_web in this case) from another terminal : 
 
 ```Terminal
 docker exec -it panterest_web bash
@@ -78,10 +78,10 @@ Now you can launch the migrations :
 php bin/console doctrine:migrations:migrate
 ```
 
-If everything is working, you can go the different interfaces of the services of the application.
+If everything is working, you can open the different interfaces of the application.
 
-http://127.0.0.1:8741 to go to the web application.
+- http://127.0.0.1:8741 to open the web interface.
 
-http://127.0.0.1:8089 to go to the phpmyadmin application.
+- http://127.0.0.1:8089 to open the phpmyadmin interface.
 
-http://127.0.0.1:8081 to go to the maildev application.
+- http://127.0.0.1:8081 to open the maildev interface.
