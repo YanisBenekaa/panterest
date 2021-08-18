@@ -29,8 +29,6 @@ Q
 !src/Form/RegistrationFormType.php,9/5/95d4b58438357928efb9c5a862a6d289d874e878
 Z
 *src/Controller/ResetPasswordController.php,1/c/1c5bac33bbb9775157369c30286644ea6d25c0a2
-]
--src/EventSubscriber/LogoutEventSubscriber.php,0/0/000ee2e6777d6bfe82c84a6a8af01f8cfc580338
 N
 templates/pins/index.html.twig,0/1/0161d8de5916da3c3c692f8cd92cb603d04353c1
 f
@@ -49,3 +47,15 @@ U
 %src/Controller/SecurityController.php,7/c/7cc876ecdb4df676c79a6188e9f3ac45e5079434
 Q
 !src/Repository/UserRepository.php,9/4/943a623b5e2fd95ea78f6287fc600a6f8e0a5235
+:
+
+.env.local,1/f/1fa30fea3e9ae270a3c38a6113a3689d8987d108
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+=
+.dockerignore,0/5/05a721ebe3ba0754116825ed1359ff1785f4bbac
+>
+php/Dockerfile,3/0/30b94f5d4d38a84826117d605e245f15aa2343e4
+F
+php/vhosts/vhosts.conf,7/b/7b5f145ff7131e1299898719d1c3610e3ba2e6d5

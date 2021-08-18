@@ -85,3 +85,5 @@ If everything is working, you can open the different interfaces of the applicati
 - http://127.0.0.1:8089 to open the phpmyadmin interface.
 
 - http://127.0.0.1:8081 to open the maildev interface.
+
+- http://127.0.0.1:9000 to open the portainer interface.
