@@ -11,6 +11,7 @@ Panterest is a simply and friendly clone of Pinterest, enjoy it !
 * Symfony CLI
 * NPM (Node.js)
 * MySQL
+* Docker
 
 You can check the prerequisite with the following command (of Symfony CLI) :
 

@@ -47,12 +47,6 @@ U
 %src/Controller/SecurityController.php,7/c/7cc876ecdb4df676c79a6188e9f3ac45e5079434
 Q
 !src/Repository/UserRepository.php,9/4/943a623b5e2fd95ea78f6287fc600a6f8e0a5235
-:
-
-.env.local,1/f/1fa30fea3e9ae270a3c38a6113a3689d8987d108
-:
-
-.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 =
 .dockerignore,0/5/05a721ebe3ba0754116825ed1359ff1785f4bbac
 >
