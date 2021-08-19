@@ -23,7 +23,14 @@ symfony check:requirements
 
 After cloning the project, you have to create an `.env.local` file at the root
 of the project in which you'll set your `DATABASE_URL`, `MAILER_DSN`, `MYSQL_ROOT_PASSWORD`, 
-`MYSQL_USER`, `MYSQL_PASSWORD` and `MYSQL_DATABASE`environment variables.
+`MYSQL_USER`, `MYSQL_PASSWORD` and `MYSQL_DATABASE`environment variables in this order :
+
+- DATABASE_URL="mysql://user:password@panterest_db:3306/databaseName?serverVersion=5.7"
+- MAILER_DSN=smtp://panterest_maildev:25
+- MYSQL_ROOT_PASSWORD=password
+- MYSQL_USER=user
+- MYSQL_PASSWORD=password
+- MYSQL_DATABASE=databaseName
 
 After that, to have the project ready to work :
 
