@@ -41,7 +41,7 @@ symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate
 ```
 
-You can check if Webpack build correctly the CSS and JS file with :
+You have to build the Webpack configuration with :
 
 ```Terminal
 npm run build

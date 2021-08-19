@@ -34,3 +34,5 @@ WORKDIR /var/www/html/panterest/
 RUN symfony composer update
 
 RUN npm i --force
+
+RUN npm run build
