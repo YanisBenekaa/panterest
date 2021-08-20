@@ -31,16 +31,8 @@ i
 9templates/bundles/TwigBundle/Exception/error404.html.twig,b/4/b425d8da08adf7fa0ec2cdb7ee5696faa2b1ab4b
 i
 9templates/bundles/TwigBundle/Exception/error403.html.twig,f/4/f4c3d1ff64c2296b7a8737dd7b2c3957c8dffce4
-M
-config/packages/security.yaml,c/5/c5f941b4d4e9404f23935164fabdd261abb68e93
-W
-'src/Security/LoginFormAuthenticator.php,5/8/58103073fd1d1900e366a38250f7db278e4f59eb
 P
  templates/account/show.html.twig,c/2/c2646f285016a8edfbe666d948b9b3368747a7fa
-U
-%src/Controller/SecurityController.php,7/c/7cc876ecdb4df676c79a6188e9f3ac45e5079434
-Q
-!src/Repository/UserRepository.php,9/4/943a623b5e2fd95ea78f6287fc600a6f8e0a5235
 B
 config/bundles.php,f/a/fa9a09a4e1ae4281250526d3dec214138beb5735
 B

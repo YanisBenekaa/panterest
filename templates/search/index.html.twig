@@ -4,26 +4,46 @@
 
 {% block body %}
     {% if app.request.method == 'POST' %}
-        <div>
             {% if pins | length == 0 %}
                 <h4>Aucun résulat pour votre recherche.</h4>
             {% else %}
                 <h3 class="mt-3">Vos résulats de recherche :</h3>
-                {% for pin in pins %}
-                    <div class="mt-3 p-3 bg-light border rounded">
-                        <a href="{{ path('app_pins_show', {id: pin.id}) }}">
-                            <div class="rounded-top overflow-hidden">
-                                <img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeholder.jpg')) | imagine_filter('squared_thumbnail_medium') }}"
-                                     alt="{{ pin.title }}"/>
+                {% for row in pins|batch(3) %}
+                    <div class="row mb-5">
+                        {% for pin in row %}
+                            <div class="col-md-4">
+                                <article class="pin bg-white rounded shadow">
+                                    <div class="mw-100 rounded-top overflow-hidden">
+                                        <a href="{{ path('app_pins_show', {id: pin.id}) }}">
+                                            <img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeholder.jpg')) | imagine_filter('squared_thumbnail_medium') }}"
+                                                 alt="{{ pin.title }}" class="w-100" />
+                                        </a>
+                                    </div>
+                                    <h2 class="h5 text-center"><a href="{{ path('app_pins_show', {id: pin.id}) }}" class="text-secondary text-decoration-none">
+                                            {{ pin.title }}</a></h2>
+                                    <p class="text-center">{{ pin.description|u.truncate(10, '...', false) }}</p>
+                                    <p class="text-muted text-center">
+                                        <small>
+                                            Submitted
+                                            <time datetime="{{ pin.createdAt|date('Y-m-d H:i:s') }}"></time>{{ pin.createdAt|ago }}
+                                            by {{ pin.user.fullName }}
+                                        </small>
+                                    </p>
+
+                                    {% if app.user == pin.user %}
+                                        <a href="#" onclick="event.preventDefault(); confirm('Are you sure ?') &&
+                                                document.querySelector('#js-pin-delete-form-{{ pin.id }}').submit();" class="btn btn-warning m-3">&times;Delete</a>
+
+                                        <form id="js-pin-delete-form-{{ pin.id }}" action="{{ path('app_pins_delete', {id: pin.id}) }}" method="post" style="display:none;">
+                                            <input type="hidden" name="csrf_token" value="{{ csrf_token('pin_deletion_' ~ pin.id) }}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                        </form>
+                                    {% endif %}
+                                </article>
                             </div>
-                            <h6 class="text-dark"><i class="bi bi-arrow-down-right-square-fill text-primary"></i> {{ pin.title }}</h6>
-                            <div class="text-dark small p-1 rounded">
-                                Posté le {{ pin.createdAt|date('Y-m-d H:i:s') }} par {{ pin.user.fullName }}
-                            </div>
-                        </a>
+                        {% endfor %}
                     </div>
                 {% endfor %}
             {% endif %}
-        </div>
     {% endif %}
 {% endblock %}
