@@ -36,3 +36,5 @@ RUN symfony composer update
 RUN npm i --force
 
 RUN npm run build
+
+USER 1000:1000
