@@ -6,6 +6,7 @@ use App\Entity\Pin;
 use App\Form\PinType;
 use App\Repository\PinRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,9 +19,15 @@ class PinsController extends AbstractController
     /**
      * @Route("/", name="app_home", methods="GET")
      */
-    public function index(PinRepository $pinRepository): Response
+    public function index(PinRepository $pinRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $pins = $pinRepository->findBy([], ['createdAt' => 'DESC']);
+        $data = $pinRepository->findBy([], ['createdAt' => 'DESC']);
+
+        $pins = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            12
+        );
 
         return $this->render('pins/index.html.twig', compact('pins'));
     }

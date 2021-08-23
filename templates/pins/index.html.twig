@@ -4,7 +4,7 @@
 
 {% block body %}
     {% if pins|length > 0 %}
-        <h1 class="mb-4 text-center text-muted">{{ pluralize(pins|length, 'Pin', 'Pins') }}</h1>
+        <h1 class="mb-4 text-center text-muted">{{ pluralize(pins|length, 'Pin', 'Pins') }} for this page</h1>
 
         {% for row in pins|batch(3) %}
         <div class="row mb-5">
@@ -42,6 +42,10 @@
             {% endfor %}
         </div>
         {% endfor %}
+        <div class="d-flex justify-content-center">
+            {% do pins.setPageRange(2) %}
+            {{ knp_pagination_render(pins, 'layouts/partials/_pagination.html.twig') }}
+        </div>
     {% else %}
         <p class="h2 mt-5 text-center">No pins yet. <a href="{{ path('app_pins_create') }}">Be the first !</a></p>
     {% endif %}

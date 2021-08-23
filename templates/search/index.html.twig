@@ -7,7 +7,7 @@
             {% if pins | length == 0 %}
                 <h4>Aucun résulat pour votre recherche.</h4>
             {% else %}
-                <h3 class="mt-3">Vos résulats de recherche :</h3>
+                <h3 class="mt-3">Vos résulats de recherche : {{ pluralize(pins|length, 'Pin', 'Pins') }}</h3>
                 {% for row in pins|batch(3) %}
                     <div class="row mb-5">
                         {% for pin in row %}
