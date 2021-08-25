@@ -31,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="Please enter your email")
-     * @Assert\Email
+     * @Assert\Email(message="Your email is not valid")
      */
     private $email;
 
@@ -43,6 +43,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Please enter your password")
+     * @Assert\NotCompromisedPassword(message="This password has been leaked in a data breach, it must not be used. Please use another password.")
+     * @Assert\Regex(pattern="/^(?=.*[a-zà-ÿ])(?=.*[A-ZÀ-Ý])(?=.*[0-9])(?=.*[^a-zà-ÿA-ZÀ-Ý0-9]).{12,}$/", message="Your password must contain 12 characters including at least : 1 lower letter, 1 upper letter, 1 number, 1 special character")
      */
     private $password;
 
