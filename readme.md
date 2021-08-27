@@ -35,7 +35,7 @@ of the project in which you'll set your `DATABASE_URL`, `MAILER_DSN`, `MYSQL_ROO
 After that, to have the project ready to work :
 
 ```Terminal
-symfony composer update
+symfony composer install
 npm i --force
 symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate
