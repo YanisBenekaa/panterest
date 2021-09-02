@@ -31,7 +31,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html/panterest/
 
-RUN symfony composer update
+RUN symfony composer install
 
 RUN npm i --force
 
