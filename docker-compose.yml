@@ -1,22 +1,6 @@
 version: '3.7'
 
 services:
-  db:
-    image: mysql:5.7
-    container_name: panterest_db
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
-      MYSQL_DATABASE: "${MYSQL_DATABASE}"
-      MYSQL_USER: "${MYSQL_USER}"
-      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
-    ports:
-      - "3307:3306"
-    networks:
-      - symfony
-
   web:
     build:
       context: .
@@ -25,25 +9,58 @@ services:
     volumes:
       - ./php/vhosts:/etc/apache2/sites-enabled
       - .:/var/www/html/panterest/
+    restart: always
     ports:
       - "8741:80"
-    restart: always
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.panterest_web.rule=Host(`panterest.docker.localhost`)"
+      - "traefik.http.routers.panterest_web.tls=true"
     networks:
-      - symfony
+      - proxy
+    hostname: panterest.docker.localhost
+
+  db:
+    image: mysql:5.7
+    container_name: panterest_db
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    ports:
+      - "3307:3306"
+    networks:
+      - proxy
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin
     container_name: panterest_phpmyadmin
     links:
       - db
     restart: always
     ports:
       - "8089:80"
+    security_opt:
+      - no-new-privileges:true
     environment:
       PMA_HOST: db
+      MEMORY_LIMIT: -1
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.panterest_phpmyadmin.rule=Host(`pma-panterest.docker.localhost`)"
+      - "traefik.http.routers.panterest_phpmyadmin.tls=true"
     networks:
-      - symfony
+      - proxy
+    hostname: pma-panterest.docker.localhost
 
   maildev:
     image: maildev/maildev
@@ -52,22 +69,19 @@ services:
     restart: always
     ports:
       - "8081:80"
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.panterest_maildev.rule=Host(`maildev-panterest.docker.localhost`)"
+      - "traefik.http.routers.panterest_maildev.tls=true"
     networks:
-      - symfony
-
-  portainer:
-    image: portainer/portainer-ce
-    container_name: portainer
-    restart: always
-    ports:
-      - "9000:9000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - symfony
+        - proxy
+    hostname: maildev-panterest.docker.localhost
 
 networks:
-  symfony:
+  proxy:
+    external: true
 
 volumes:
   db_data:

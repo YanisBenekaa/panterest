@@ -13,6 +13,7 @@ Panterest is a simply and friendly clone of Pinterest, enjoy it !
 * MySQL
 * Docker
 * Docker-Compose
+* Traefik
 
 You can check the prerequisite with the following command (of Symfony CLI) :
 
@@ -26,6 +27,13 @@ After cloning the project, you have to create an `.env.local` file at the root
 of the project in which you'll set your `DATABASE_URL`, `MAILER_DSN`, `MYSQL_ROOT_PASSWORD`, 
 `MYSQL_USER`, `MYSQL_PASSWORD` and `MYSQL_DATABASE`environment variables in this order :
 
+If you want to use the project locally, the `DATABASE_URL`and `MAILER_DSN` environment variables will be 
+like that following example :
+- DATABASE_URL="mysql://user:password@127.0.0.1:3306/databaseName?serverVersion=5.7"
+- MAILER_DSN=smtp://localhost:25
+
+If you want to use it with the Docker configuration, you need to set this variables like that 
+following example :
 - DATABASE_URL="mysql://user:password@panterest_db:3306/databaseName?serverVersion=5.7"
 - MAILER_DSN=smtp://panterest_maildev:25
 - MYSQL_ROOT_PASSWORD=password
@@ -90,12 +98,15 @@ Now you can launch the migrations :
 php bin/console doctrine:migrations:migrate
 ```
 
+### Create Traefik development environment
+
+To access to the different interfaces of the application, you have to install locally the proxy server.
+You can find it here : [server-proxy-portainer](https://github.com/YanisBenekaa/server-proxy-portainer)
+
 If everything is working, you can open the different interfaces of the application.
 
-- http://127.0.0.1:8741 to open the web interface.
+- https://panterest.docker.localhost to open the web interface.
 
-- http://127.0.0.1:8089 to open the phpmyadmin interface.
+- https://pma-panterest.docker.localhost to open the phpmyadmin interface.
 
 - http://127.0.0.1:8081 to open the maildev interface.
-
-- http://127.0.0.1:9000 to open the portainer interface.
