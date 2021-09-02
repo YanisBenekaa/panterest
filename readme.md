@@ -12,6 +12,7 @@ Panterest is a simply and friendly clone of Pinterest, enjoy it !
 * NPM (Node.js)
 * MySQL
 * Docker
+* Docker-Compose
 
 You can check the prerequisite with the following command (of Symfony CLI) :
 
@@ -46,6 +47,9 @@ You have to build the Webpack configuration with :
 ```Terminal
 npm run build
 ```
+
+In the public folder, you have to create an uploads folder with inside a pins folder. It's vital to backup
+the images of pins. This is the correct path : `public/uploads/pins`
 
 ### Launch development environment
 
