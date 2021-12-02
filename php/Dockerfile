@@ -2,6 +2,9 @@ FROM php:7.4-apache
 
 COPY composer.json composer.lock package.json package-lock.json /var/www/html/panterest/
 
+ARG USER_ID
+ARG GROUP_ID
+
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
 && apt-get update \
 && apt-get install -y \
@@ -31,10 +34,11 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html/panterest/
 
-RUN symfony composer install
+RUN symfony composer install \
+&& npm i --force \
+&& npm run build
 
-RUN npm i --force
+RUN groupadd -f -g $GROUP_ID user \
+&& useradd -u $USER_ID -g $GROUP_ID user
 
-RUN npm run build
-
-USER 1000:1000
+USER user

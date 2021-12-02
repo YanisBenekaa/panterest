@@ -5,6 +5,9 @@ services:
     build:
       context: .
       dockerfile: ./php/Dockerfile
+      args:
+          USER_ID: ${USER_ID}
+          GROUP_ID: ${GROUP_ID}
     container_name: panterest_web
     volumes:
       - ./php/vhosts:/etc/apache2/sites-enabled

@@ -42,6 +42,7 @@ following example :
 - MYSQL_DATABASE=databaseName
 
 After that, to have the project ready to work :
+(If you want to use the Docker configuration, you don't need to execute the five following commands.)
 
 ```Terminal
 symfony composer install
@@ -74,19 +75,11 @@ At the stage, you can install the images and create the containers with this fol
 that will also start the containers :
 
 ```Terminal
-docker-compose --env-file .env.local up --build
-```
-
-You need to check if you have the permissions to modify the files outside the containers.
-If you're not `root`, you have to change the permissions from `root root` to `$currentUser root`
-with the appropriate command (it depends on your system) like :
-
-```Terminal
-chown -R $USER ./
+USER_ID=$(id -u) GROUP_ID=$(id -g) docker-compose --env-file .env.local up -d --build
 ```
 
 To launch the migrations, you need to enter inside the container that build the PHP image 
-(it's panterest_web in this case) from another terminal : 
+(it's panterest_web in this case) : 
 
 ```Terminal
 docker exec -it panterest_web bash
